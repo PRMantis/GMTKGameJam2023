@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Asteroid))]
+[RequireComponent(typeof(Player))]
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private Asteroid asteroid;
+    [SerializeField] private Player player;
 
     private bool inputEnabled = true;
 
@@ -14,6 +16,10 @@ public class PlayerInput : MonoBehaviour
         if (asteroid == null)
         {
             asteroid = GetComponent<Asteroid>();
+        }
+        if (player == null)
+        {
+            player = GetComponent<Player>();
         }
     }
 
@@ -27,6 +33,12 @@ public class PlayerInput : MonoBehaviour
             Vector2 direction = new Vector2(h, v);
             direction.Normalize();
             asteroid.ApplyForce(direction);
+
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                player.TryBoost(direction);
+            }
         }
     }
 
