@@ -238,7 +238,7 @@ MonoBehaviour:
   timeTillLastMovement: -12.64
   rateOfMovement: 5
   attackTarget: {fileID: 0}
-  maxDistanceUntilStopChase: 100
+  maxDistanceUntilStopChase: 30
 --- !u!60 &7072923985897653427
 PolygonCollider2D:
   m_ObjectHideFlags: 0

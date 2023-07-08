@@ -375,6 +375,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8721071334092336603, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
+      propertyPath: m_Mass
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: -8721071334092336603, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
+      propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7072923985897653423, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -1170,11 +1178,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 706825857607066212, guid: de043fc9d913fee44aa63262b4f3c859, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.08
+      value: -11.6
       objectReference: {fileID: 0}
     - target: {fileID: 706825857607066212, guid: de043fc9d913fee44aa63262b4f3c859, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5
+      value: -4.44
       objectReference: {fileID: 0}
     - target: {fileID: 706825857607066212, guid: de043fc9d913fee44aa63262b4f3c859, type: 3}
       propertyPath: m_LocalPosition.z

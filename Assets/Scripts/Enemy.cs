@@ -58,6 +58,10 @@ public class Enemy : MonoBehaviour
 
     private void Attack(GameObject target)
     {
+        if(target == null)
+        {
+            ChangeState(EnemyStates.IsMoving);
+        }
         var rotation = RotateTowardsPoint(target.transform.position);
         if (timeSinceLastShot >= timeTillShots)
         {
@@ -71,19 +75,14 @@ public class Enemy : MonoBehaviour
 
 
     //Colliders
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Asteroid")
+        if (enemyState == EnemyStates.IsMoving && collision.gameObject.tag == "Asteroid")
         {
-            if (enemyState == EnemyStates.IsAttackingAsteroid)
-            {
-                var direction = collision.gameObject.transform.position;
-                direction.Normalize();
-                enemyRb.velocity = Vector2.zero;
-            }
-
+            ChangeState(EnemyStates.IsAttackingAsteroid);
+            attackTarget = collision.gameObject;
         }
-        if(enemyState == EnemyStates.IsMoving || enemyState == EnemyStates.IsAttackingAsteroid || enemyState == EnemyStates.IsChasingPlayer)
+        else if (enemyState == EnemyStates.IsMoving || enemyState == EnemyStates.IsAttackingAsteroid || enemyState == EnemyStates.IsChasingPlayer)
         {
             if (collision.gameObject.tag == "Player")
             {
@@ -91,23 +90,29 @@ public class Enemy : MonoBehaviour
                 attackTarget = collision.gameObject;
             }
         }
-        else if(enemyState == EnemyStates.IsMoving && collision.gameObject.tag == "Asteroid")
-        {
-            ChangeState(EnemyStates.IsAttackingAsteroid);
-            attackTarget = collision.gameObject;
-        }
+
     }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (enemyState == EnemyStates.IsAttackingAsteroid)
+        if(collision.gameObject.tag == "Asteroid")
         {
-            ChangeState(EnemyStates.IsMoving);
+            if (enemyState == EnemyStates.IsAttackingAsteroid)
+            {
+                ChangeState(EnemyStates.IsMoving);
+            }
         }
-        if (enemyState == EnemyStates.IsAttackingPlayer)
+
+        if (collision.gameObject.tag == "Player")
         {
-            ChangeState(EnemyStates.IsChasingPlayer);
+            if (enemyState == EnemyStates.IsAttackingPlayer)
+            {
+                ChangeState(EnemyStates.IsChasingPlayer);
+            }
         }
+
+
     }
 
     private Quaternion RotateTowardsPoint(Vector2 movementDirection)
