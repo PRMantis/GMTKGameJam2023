@@ -6,16 +6,21 @@ public class Enemy : MonoBehaviour
 {
     public PolygonCollider2D enemyHitbox;
     public BoxCollider2D enemyAttackRange;
+    public Rigidbody2D enemyRb;
 
-    [SerializeField] public float enemySpeed = 5f;
+    [SerializeField] public float enemySpeedForce = 50f;
 
     public GameObject laserBolt;
     [SerializeField] public float minimumCollisionSpeed = 51f;
 
     public GameObject gunBarrel;
+    public BoxCollider2D flightZone;
 
     private float timeSinceLastShot = 2f;
     private float timeTillShots = 2f;
+
+    private float timeTillLastMovement = 3f;
+    private float rateOfMovement = 3f;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +32,9 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         timeSinceLastShot += Time.deltaTime;
+        timeTillLastMovement += Time.deltaTime;
+
+        EnemyMovement();
     }
 
     private void AttackRandomAsteroid()
@@ -69,5 +77,31 @@ public class Enemy : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    private void EnemyMovement()
+    {
+        if(timeTillLastMovement >= rateOfMovement)
+        {
+            var randomSpot = GetRandomSpotInBounds();
+
+            randomSpot.Normalize();
+            enemyRb.AddForce(randomSpot * enemySpeedForce, ForceMode2D.Force);
+        }
+
+    }
+
+    private Vector2 GetRandomSpotInBounds()
+    {
+        var minY = flightZone.bounds.min.y;
+        var maxY = flightZone.bounds.max.y;
+
+        var minX = flightZone.bounds.min.x;
+        var maxX = flightZone.bounds.max.x;
+
+        var randomX = Random.Range(minX, maxX);
+        var randomY = Random.Range(minY, maxY);
+
+        return new Vector2(randomX, randomY);
     }
 }

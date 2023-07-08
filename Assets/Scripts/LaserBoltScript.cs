@@ -6,7 +6,8 @@ public class LaserBoltScript : MonoBehaviour
 {
     private BoxCollider2D laserCollider;
     [SerializeField] public int laserDamange = 5;
-    [SerializeField] public float boltSpeed = 10f;
+
+    [SerializeField] public float boltForce = 100f;
 
     public GameObject target;
 
@@ -25,34 +26,42 @@ public class LaserBoltScript : MonoBehaviour
 
         transform.LookAt(lastPosition);
         laserboltRb = GetComponent<Rigidbody2D>();
+
+        GoToTarget();
     }
 
     private void Update()
     {
-        GoToTarget();
         KeepAxisConsistent();
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if(!collision.isTrigger)
         {
             if (collision.gameObject.TryGetComponent(out Health health))
             {
                 health.TakeDamage(laserDamange);
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
     }
 
     public void GoToTarget()
     {
-        laserboltRb.AddForce(lastPosition - (Vector2)transform.position);
+        RotateTowardsEnemy(lastPosition);
+        laserboltRb.AddForce((lastPosition - (Vector2)transform.position.normalized) * boltForce);
+    }
+
+    private void RotateTowardsEnemy(Vector2 direction)
+    {
+        Quaternion toRotation = Quaternion.LookRotation(Vector2.up, direction);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 50f * Time.deltaTime);
     }
 
     private void KeepAxisConsistent()
     {
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0, transform.eulerAngles.z);
+        transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
         transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 }
