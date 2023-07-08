@@ -228,7 +228,7 @@ MonoBehaviour:
   enemyHitbox: {fileID: 7072923985897653427}
   enemyAttackRange: {fileID: 5063909313394990867}
   enemyRb: {fileID: -8721071334092336603}
-  enemySpeedForce: 200
+  enemySpeedForce: 120
   laserBolt: {fileID: 8368444365474616885, guid: 43b9ff723d92b5e48815794fe77a87ff, type: 3}
   minimumCollisionSpeed: 51
   gunBarrel: {fileID: 1343482038445531505}

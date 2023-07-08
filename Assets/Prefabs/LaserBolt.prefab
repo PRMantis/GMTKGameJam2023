@@ -100,8 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserDamange: 20
-  boltForce: 20
+  boltForce: 9
   target: {fileID: 0}
+  rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!61 &-8961751361589542688
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -172,5 +173,5 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
