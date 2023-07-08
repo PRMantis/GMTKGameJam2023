@@ -20,5 +20,6 @@ public class CollisionAvoidance : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         enemy.StopMovement();
+        enemy.ChangeState(EnemyStates.IsMoving);
     }
 }

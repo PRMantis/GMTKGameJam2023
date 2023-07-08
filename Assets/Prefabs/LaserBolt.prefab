@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserDamange: 20
-  boltSpeed: 5
+  boltForce: 300
   target: {fileID: 0}
 --- !u!61 &-8961751361589542688
 BoxCollider2D:
