@@ -10,14 +10,19 @@ using static UnityEngine.Rendering.DebugUI;
 public class Player : MonoBehaviour
 {
     public Action<float> OnBoostChange;
-
     public Health Health { get; private set; }
 
+    [SerializeField] private ParticleSystem asteroidBreakParticles;
+    [SerializeField] private List<GameObject> healthIndicators;
     [SerializeField] private float boostRechargeTime = 2;//in seconds
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip breakSound;//in seconds
 
     private float boostPower;
     private PlayerInput input;
     private Asteroid asteroid;
+    private int healthPartsCount;
 
     private void Awake()
     {
@@ -36,18 +41,17 @@ public class Player : MonoBehaviour
             asteroid = GetComponent<Asteroid>();
         }
 
+        healthPartsCount = Health.GetMaxHealth() / healthIndicators.Count;
+
         boostPower = 0;
         Health.OnDie += OnPlayerDie;
-    }
-
-    void Start()
-    {
-
+        Health.OnTakeDamage += OnPlayerTakeDamage;
     }
 
     private void OnDestroy()
     {
         Health.OnDie -= OnPlayerDie;
+        Health.OnTakeDamage -= OnPlayerTakeDamage;
     }
 
     private void Update()
@@ -68,6 +72,28 @@ public class Player : MonoBehaviour
     {
         boostPower = value;
         OnBoostChange?.Invoke(boostPower);
+    }
+
+    private void OnPlayerTakeDamage(int damage)
+    {
+        int curHealth = Health.GetHealth();
+        for (int i = 0; i < healthIndicators.Count; i++)
+        {
+            if (curHealth < (i + 1) * healthPartsCount)
+            {
+                if (healthIndicators[i].activeSelf)
+                {
+                    if (asteroidBreakParticles != null)
+                    {
+                        Destroy(Instantiate(asteroidBreakParticles, transform.position, Quaternion.identity), 2);
+                    }
+
+                    healthIndicators[i].SetActive(false);
+
+                    SoundManager.Instance.PlaySound(breakSound, transform.position, SoundManager.Instance.GetAudioMixerGroup(AudioGroup.SFX));
+                }
+            }
+        }
     }
 
     private void OnPlayerDie()

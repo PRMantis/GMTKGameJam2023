@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - GunBarrel
   - Wall
+  - Destination
   layers:
   - Default
   - TransparentFX

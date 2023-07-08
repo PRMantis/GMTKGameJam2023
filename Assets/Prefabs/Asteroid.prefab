@@ -216,6 +216,6 @@ MonoBehaviour:
   movePower: 20
   moveBoostPower: 40
   pushPowerMultiplier: 15
-  takeDamageSpeedThreshold: 5
+  takeDamageSpeedThreshold: 4.5
   rb: {fileID: 1492807361553081891}
   health: {fileID: 0}
