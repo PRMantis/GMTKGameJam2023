@@ -36,30 +36,35 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         CalculateTimes();
+        Debug.Log(enemyState);
 
         if(enemyState == EnemyStates.IsMoving || enemyState == EnemyStates.IsAttackingPlayer)
         {
-            EnemyMovement();
+            //EnemyMovement();
         }
         if (enemyState == EnemyStates.IsAttackingAsteroid || enemyState == EnemyStates.IsAttackingPlayer)
         {
             Attack(attackTarget);
         }
-        if (Vector2.Distance(transform.position, attackTarget.transform.position) >= maxDistanceUntilStopChase && enemyState == EnemyStates.IsChasingPlayer)
+        if(enemyState == EnemyStates.IsChasingPlayer)
         {
-            ChangeState(EnemyStates.IsMoving);
-            return;
+            if (Vector2.Distance(transform.position, attackTarget.transform.position) >= maxDistanceUntilStopChase)
+            {
+                ChangeState(EnemyStates.IsMoving);
+                return;
+            }
         }
     }
 
     private void Attack(GameObject target)
     {
-        RotateTowardsPoint(target.transform.position);
+        var rotation = RotateTowardsPoint(target.transform.position);
         if (timeSinceLastShot >= timeTillShots)
         {
             timeSinceLastShot = 0f;
-            var laserBoltNew = Instantiate(laserBolt, gunBarrel.transform.position, laserBolt.transform.rotation);
+            var laserBoltNew = Instantiate(laserBolt, gunBarrel.transform.position, rotation);
             laserBoltNew.GetComponent<LaserBoltScript>().target = target;
+            laserBoltNew.GetComponent<LaserBoltScript>().rotation = rotation;
         }
 
     }
@@ -75,8 +80,6 @@ public class Enemy : MonoBehaviour
                 var direction = collision.gameObject.transform.position;
                 direction.Normalize();
                 enemyRb.velocity = Vector2.zero;
-
-                Attack(collision.gameObject);
             }
 
         }
@@ -107,11 +110,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void RotateTowardsPoint(Vector2 movementDirection)
+    private Quaternion RotateTowardsPoint(Vector2 movementDirection)
     {
         Vector2 difference = movementDirection - (Vector2)transform.position;
         float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
+        var offset = -90f;
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ + offset);
+        return transform.rotation;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -152,7 +157,7 @@ public class Enemy : MonoBehaviour
 
     private Vector2 GetRandomSpotInBounds()
     {
-        var movementDirection = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
+        var movementDirection = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f));
         var movementPerSecond = movementDirection * enemySpeedForce;
 
         return movementPerSecond;

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343482038445531505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.66, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -237,6 +237,8 @@ MonoBehaviour:
   timeTillShots: 2
   timeTillLastMovement: -12.64
   rateOfMovement: 5
+  attackTarget: {fileID: 0}
+  maxDistanceUntilStopChase: 100
 --- !u!60 &7072923985897653427
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -299,6 +301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   curHealth: 0
+  takehitSound: {fileID: 0}
 --- !u!50 &-8721071334092336603
 Rigidbody2D:
   serializedVersion: 4
@@ -355,9 +358,9 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.085104704, y: 3.0027628}
+  m_Offset: {x: 0, y: 5.63}
   serializedVersion: 2
-  m_Radius: 3.5478745
+  m_Radius: 4.9046826

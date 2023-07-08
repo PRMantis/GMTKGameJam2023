@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 8368444365474616885}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.446655, y: -1.7465079, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 10.82, y: 10.82, z: 1.3525}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserDamange: 20
-  boltForce: 300
+  boltForce: 20
   target: {fileID: 0}
 --- !u!61 &-8961751361589542688
 BoxCollider2D:

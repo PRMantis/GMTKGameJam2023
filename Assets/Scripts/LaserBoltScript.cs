@@ -13,6 +13,7 @@ public class LaserBoltScript : MonoBehaviour
 
     private Vector2 lastPosition; //so that it only goes in straight line
     private Rigidbody2D laserboltRb;
+    public Quaternion rotation;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,6 @@ public class LaserBoltScript : MonoBehaviour
         Destroy(gameObject, 5f); // Destroys itself after five seconds
 
         lastPosition = target.transform.position;
-        lastPosition.Normalize();
 
         transform.LookAt(lastPosition);
         laserboltRb = GetComponent<Rigidbody2D>();
@@ -49,11 +49,10 @@ public class LaserBoltScript : MonoBehaviour
 
     public void GoToTarget()
     {
-        RotateTowardsEnemy(lastPosition);
         laserboltRb.velocity = Vector2.zero; //so that it stops moving
         laserboltRb.angularVelocity = 0; //so that it stops moving
 
-        laserboltRb.AddForce((lastPosition - (Vector2)transform.position.normalized) * boltForce);
+        laserboltRb.AddForce((lastPosition - (Vector2)transform.position).normalized * boltForce, ForceMode2D.Impulse);
     }
 
     private void RotateTowardsEnemy(Vector2 direction)
@@ -64,7 +63,7 @@ public class LaserBoltScript : MonoBehaviour
 
     private void KeepAxisConsistent()
     {
-        transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        transform.localRotation = rotation;
+        //transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 }
