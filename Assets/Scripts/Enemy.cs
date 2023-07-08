@@ -83,9 +83,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void EnemyMovement()
+    private void EnemyMovement(bool overrideOnCollision = false)
     {
-        if(timeTillLastMovement >= rateOfMovement)
+        if((timeTillLastMovement >= rateOfMovement) || overrideOnCollision)
         {
             timeTillLastMovement = 0f;
             var randomSpot = GetRandomSpotInBounds();
@@ -108,5 +108,11 @@ public class Enemy : MonoBehaviour
         float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
         return movementPerSecond;
+    }
+
+    public void StopMovement()
+    {
+        enemyRb.velocity = Vector3.zero;
+        EnemyMovement(true);
     }
 }

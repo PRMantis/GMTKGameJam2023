@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4404960645930741221}
   - component: {fileID: 817824144205827959}
+  - component: {fileID: 4312867539916874312}
   m_Layer: 0
   m_Name: MovementRange
   m_TagString: Untagged
@@ -108,6 +109,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10, y: 10}
   m_EdgeRadius: 0
+--- !u!114 &4312867539916874312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3301524658074554240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071bc9ed0df3b7b46a12616f03a67013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 7072923985897653424}
 --- !u!1 &7072923985897653423
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,11 +228,15 @@ MonoBehaviour:
   enemyHitbox: {fileID: 7072923985897653427}
   enemyAttackRange: {fileID: 7072923985897653426}
   enemyRb: {fileID: -8721071334092336603}
-  enemySpeedForce: 5
+  enemySpeedForce: 200
   laserBolt: {fileID: 8368444365474616885, guid: 43b9ff723d92b5e48815794fe77a87ff, type: 3}
   minimumCollisionSpeed: 51
   gunBarrel: {fileID: 1343482038445531505}
   flightZone: {fileID: 817824144205827959}
+  timeSinceLastShot: 2
+  timeTillShots: 2
+  timeTillLastMovement: 3
+  rateOfMovement: 5
 --- !u!60 &7072923985897653427
 PolygonCollider2D:
   m_ObjectHideFlags: 0
