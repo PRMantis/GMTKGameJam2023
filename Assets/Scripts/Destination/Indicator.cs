@@ -52,12 +52,20 @@ public class Indicator : MonoBehaviour
                     Mathf.Clamp(targetViewportPosition.y, 0.1f, 0.9f), mainCamera.nearClipPlane));
 
                 indicator.transform.position = new Vector3(screenEdge.x, screenEdge.y, -9);
-
-                Quaternion rotation = Quaternion.LookRotation(transform.position - indicator.transform.position,
-                    indicator.transform.TransformDirection(Vector3.up));
-                indicator.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
-
+                RotateTowards(indicator.transform, transform.position);
+                //Quaternion rotation = Quaternion.LookRotation(transform.position - indicator.transform.position,
+                //    indicator.transform.TransformDirection(Vector3.up));
+                //indicator.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
+                //indicator.transform.LookAt(transform.position, transform.up);
             }
         }
+    }
+
+    private void RotateTowards(Transform transform, Vector2 target)
+    {
+        Vector2 direction = (target - (Vector2)transform.position).normalized;
+        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        var offset = 90f;
+        transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
     }
 }
