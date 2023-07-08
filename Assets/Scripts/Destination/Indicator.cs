@@ -9,7 +9,6 @@ public class Indicator : MonoBehaviour
     [SerializeField] private Player player;
 
     private GameObject indicator;
-    private bool isIndicatorActive;
     private Camera mainCamera;
 
     private void Awake()
@@ -19,13 +18,11 @@ public class Indicator : MonoBehaviour
         indicator.SetActive(false);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 targetDirection = transform.position - player.transform.position;
@@ -34,7 +31,6 @@ public class Indicator : MonoBehaviour
         if (distanceToTarget < offScreenThreshold)
         {
             indicator.SetActive(false);
-            isIndicatorActive = false;
         }
         else
         {
@@ -46,17 +42,12 @@ public class Indicator : MonoBehaviour
             }
             else
             {
-                isIndicatorActive = true;
                 indicator.SetActive(true);
                 Vector3 screenEdge = mainCamera.ViewportToWorldPoint(new Vector3(Mathf.Clamp(targetViewportPosition.x, 0.1f, 0.9f),
                     Mathf.Clamp(targetViewportPosition.y, 0.1f, 0.9f), mainCamera.nearClipPlane));
 
                 indicator.transform.position = new Vector3(screenEdge.x, screenEdge.y, -9);
                 RotateTowards(indicator.transform, transform.position);
-                //Quaternion rotation = Quaternion.LookRotation(transform.position - indicator.transform.position,
-                //    indicator.transform.TransformDirection(Vector3.up));
-                //indicator.transform.rotation = new Quaternion(0, 0, rotation.z, rotation.w);
-                //indicator.transform.LookAt(transform.position, transform.up);
             }
         }
     }

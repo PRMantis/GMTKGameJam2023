@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1492807361553081890}
   - component: {fileID: 1492807361553081889}
-  - component: {fileID: 1492807361553081892}
+  - component: {fileID: 4597020878054792930}
   - component: {fileID: 1492807361553081891}
   - component: {fileID: 1492807361553081894}
   - component: {fileID: 1492807361553081893}
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 1d683a349d301b24e970ca224e456820, type: 3}
+  m_Color: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -88,8 +88,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &1492807361553081892
-CircleCollider2D:
+--- !u!60 &4597020878054792930
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -121,8 +121,44 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.5, y: 0}
+      - {x: 0.5, y: 0.16}
+      - {x: 0.48, y: 0.19}
+      - {x: 0.39999998, y: 0.24}
+      - {x: 0.38, y: 0.26}
+      - {x: 0.29999998, y: 0.31}
+      - {x: 0.28, y: 0.32999998}
+      - {x: 0.19999999, y: 0.38}
+      - {x: 0.11, y: 0.45}
+      - {x: 0.03, y: 0.5}
+      - {x: -0.17, y: 0.5}
+      - {x: -0.21, y: 0.45}
+      - {x: -0.31, y: 0.29999998}
+      - {x: -0.39999998, y: 0.17999999}
+      - {x: -0.48999998, y: 0.03}
+      - {x: -0.5, y: 0}
+      - {x: -0.5, y: -0.17}
+      - {x: -0.44, y: -0.22999999}
+      - {x: -0.38, y: -0.26}
+      - {x: -0.29, y: -0.32}
+      - {x: -0.17, y: -0.41}
+      - {x: -0.01, y: -0.5}
+      - {x: 0.16, y: -0.5}
+      - {x: 0.19, y: -0.48}
+      - {x: 0.26, y: -0.39}
+      - {x: 0.47, y: -0.049999997}
+  m_UseDelaunayMesh: 0
 --- !u!50 &1492807361553081891
 Rigidbody2D:
   serializedVersion: 4
@@ -137,7 +173,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 30
   m_LinearDrag: 2
-  m_AngularDrag: 2
+  m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -163,6 +199,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  curHealth: 0
+  takehitSound: {fileID: 8300000, guid: 12460286f54dd6b4db5529f09df6570d, type: 3}
 --- !u!114 &1492807361553081893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,6 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movePower: 20
+  moveBoostPower: 40
   pushPowerMultiplier: 15
   takeDamageSpeedThreshold: 5
   rb: {fileID: 1492807361553081891}
