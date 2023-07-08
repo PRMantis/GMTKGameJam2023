@@ -28,7 +28,9 @@ public class Asteroid : MonoBehaviour
         if (collision.gameObject.GetComponent<Player>() != null)
         {
             ContactPoint2D contactPoint = collision.GetContact(0);
-            rb.AddForce(contactPoint.normal * contactPoint.rigidbody.mass * hitPowerMultiplier, ForceMode2D.Impulse);
+
+            float power = contactPoint.rigidbody.velocity.magnitude * contactPoint.rigidbody.mass;
+            rb.AddForce(contactPoint.normal * power * hitPowerMultiplier, ForceMode2D.Impulse);
             contactPoint.rigidbody.velocity = Vector2.zero;
         }
     }
