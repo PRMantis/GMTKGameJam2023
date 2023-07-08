@@ -10,7 +10,7 @@ public class Health : MonoBehaviour
 
     [SerializeField] private int maxHealth = 100;
 
-    private int curHealth;
+    [SerializeField] private int curHealth;
 
     private void Awake()
     {
