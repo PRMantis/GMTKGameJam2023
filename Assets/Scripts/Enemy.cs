@@ -36,11 +36,10 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         CalculateTimes();
-        Debug.Log(enemyState);
 
-        if(enemyState == EnemyStates.IsMoving || enemyState == EnemyStates.IsAttackingPlayer)
+        if(enemyState == EnemyStates.IsMoving || enemyState == EnemyStates.IsChasingPlayer)
         {
-            //EnemyMovement();
+            EnemyMovement();
         }
         if (enemyState == EnemyStates.IsAttackingAsteroid || enemyState == EnemyStates.IsAttackingPlayer)
         {
@@ -137,7 +136,16 @@ public class Enemy : MonoBehaviour
 
     private void EnemyMovement(bool overrideOnCollision = false)
     {
-        if((timeTillLastMovement >= rateOfMovement) || overrideOnCollision || enemyState != EnemyStates.IsAttackingPlayer)
+        if (enemyState == EnemyStates.IsChasingPlayer)
+        {
+            var playerLocation = attackTarget.transform.position;
+            RotateTowardsPoint(playerLocation);
+            timeTillLastMovement = 0f;
+            enemyRb.velocity = Vector3.zero;
+
+            enemyRb.AddForce((playerLocation - transform.position).normalized * enemySpeedForce, ForceMode2D.Impulse);
+        }
+        else if ((timeTillLastMovement >= rateOfMovement) || overrideOnCollision)
         {
             if(enemyState == EnemyStates.IsMoving)
             {
@@ -146,17 +154,11 @@ public class Enemy : MonoBehaviour
                 timeTillLastMovement = 0f;
                 enemyRb.velocity = Vector3.zero;
 
-                enemyRb.AddForce(randomSpot, ForceMode2D.Impulse);
+                enemyRb.AddForce((randomSpot - (Vector2)transform.position).normalized * enemySpeedForce, ForceMode2D.Impulse);
             }
 
         }
-        else if (enemyState == EnemyStates.IsAttackingPlayer)
-        {
-            var playerLocation = attackTarget.transform.position;
-            enemyRb.velocity = Vector3.zero;
 
-            enemyRb.AddForce(playerLocation, ForceMode2D.Impulse);
-        }
 
     }
 

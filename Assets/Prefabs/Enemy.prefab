@@ -96,7 +96,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.011922836, y: 0.36662936}
+  m_Offset: {x: 0.035983205, y: 0.1430676}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -107,7 +107,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0710135, y: 2.03468}
+  m_Size: {x: 2.3584502, y: 2.4818034}
   m_EdgeRadius: 0
 --- !u!114 &4312867539916874312
 MonoBehaviour:
@@ -233,12 +233,12 @@ MonoBehaviour:
   minimumCollisionSpeed: 51
   gunBarrel: {fileID: 1343482038445531505}
   flightZone: {fileID: 817824144205827959}
-  timeSinceLastShot: 2
+  timeSinceLastShot: 0
   timeTillShots: 2
-  timeTillLastMovement: -12.64
-  rateOfMovement: 5
+  timeTillLastMovement: 0
+  rateOfMovement: 3
   attackTarget: {fileID: 0}
-  maxDistanceUntilStopChase: 30
+  maxDistanceUntilStopChase: 50
 --- !u!60 &7072923985897653427
 PolygonCollider2D:
   m_ObjectHideFlags: 0
