@@ -45,6 +45,11 @@ public class Player : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        Health.OnDie -= OnPlayerDie;
+    }
+
     private void Update()
     {
 

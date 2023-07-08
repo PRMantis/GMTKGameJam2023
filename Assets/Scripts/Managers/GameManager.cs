@@ -20,7 +20,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        gameCamera.SetFollowTarget(player.transform);
+        if (gameCamera != null && player != null)
+        {
+            gameCamera.SetFollowTarget(player.transform);
+        }
     }
 
     void Start()

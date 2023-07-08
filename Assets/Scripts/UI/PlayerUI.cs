@@ -9,16 +9,22 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] private Image healthBarImage;
 
     private Health playerHealth;
+    private Player player;
 
     // Start is called before the first frame update
     void Start()
     {
-        Player player = GameManager.Instance.GetPlayer();
-
+        player = GameManager.Instance.GetPlayer();
         playerHealth = player.GetComponent<Health>();
 
         player.OnBoostChange += OnBoostChange;
         playerHealth.OnTakeDamage += OnPlayerTakeDamage;
+    }
+
+    private void OnDestroy()
+    {
+        player.OnBoostChange -= OnBoostChange;
+        playerHealth.OnTakeDamage -= OnPlayerTakeDamage;
     }
 
     private void OnBoostChange(float value)//from 0 to 1

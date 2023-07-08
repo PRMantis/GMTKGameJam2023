@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Health : MonoBehaviour
 {
@@ -9,8 +10,9 @@ public class Health : MonoBehaviour
     public Action<int> OnTakeDamage;
 
     [SerializeField] private int maxHealth = 100;
-
     [SerializeField] private int curHealth;
+
+    [SerializeField] private AudioClip takehitSound;
 
     private void Awake()
     {
@@ -39,6 +41,7 @@ public class Health : MonoBehaviour
         OnTakeDamage?.Invoke(damage);
 
         DynamicWorldText.Instance.ShowActionText(transform.position + Vector3.back, Color.red, $"-{damage}", 0.4f);
+        SoundManager.Instance.PlaySound(takehitSound, transform.position, SoundManager.Instance.GetAudioMixerGroup(AudioGroup.SFX));
 
         if (curHealth <= 0)
         {
