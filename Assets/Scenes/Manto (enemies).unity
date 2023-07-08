@@ -869,8 +869,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8721071334092336603, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8721071334092336603, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 817824144205827959, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
+      propertyPath: m_Size.x
+      value: 4.9893813
+      objectReference: {fileID: 0}
+    - target: {fileID: 817824144205827959, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
+      propertyPath: m_Size.y
+      value: 4.31995
+      objectReference: {fileID: 0}
+    - target: {fileID: 817824144205827959, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.13594747
+      objectReference: {fileID: 0}
+    - target: {fileID: 817824144205827959, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
+      propertyPath: m_Offset.y
+      value: 2.840025
       objectReference: {fileID: 0}
     - target: {fileID: 817824144205827959, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
       propertyPath: m_IsTrigger

@@ -16,11 +16,11 @@ public class Enemy : MonoBehaviour
     public GameObject gunBarrel;
     public BoxCollider2D flightZone;
 
-    private float timeSinceLastShot = 2f;
-    private float timeTillShots = 2f;
+    [SerializeField] private float timeSinceLastShot = 2f;
+    [SerializeField] private float timeTillShots = 2f;
 
-    private float timeTillLastMovement = 3f;
-    private float rateOfMovement = 5f;
+    [SerializeField] private float timeTillLastMovement = 3f;
+    [SerializeField] private float rateOfMovement = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -87,28 +87,26 @@ public class Enemy : MonoBehaviour
     {
         if(timeTillLastMovement >= rateOfMovement)
         {
+            timeTillLastMovement = 0f;
             var randomSpot = GetRandomSpotInBounds();
+            Debug.Log(randomSpot);
 
-            enemyRb.velocity = Vector2.zero; //so that it stops moving
-            enemyRb.angularVelocity = 0; //so that it stops moving
+            enemyRb.velocity = Vector3.zero;
 
-            randomSpot.Normalize();
-            enemyRb.AddForce(randomSpot * enemySpeedForce, ForceMode2D.Force);
+            enemyRb.AddForce(randomSpot, ForceMode2D.Impulse);
         }
 
     }
 
     private Vector2 GetRandomSpotInBounds()
     {
-        var minY = flightZone.bounds.min.y;
-        var maxY = flightZone.bounds.max.y;
+        var movementDirection = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
+        var movementPerSecond = movementDirection * enemySpeedForce;
 
-        var minX = flightZone.bounds.min.x;
-        var maxX = flightZone.bounds.max.x;
 
-        var randomX = Random.Range(minX, maxX);
-        var randomY = Random.Range(minY, maxY);
-
-        return new Vector2(randomX, randomY);
+        Vector2 difference = movementDirection - (Vector2)transform.position;
+        float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
+        return movementPerSecond;
     }
 }
