@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 412269007697939981}
   - component: {fileID: 412269007697939980}
+  - component: {fileID: 7594478983715109663}
   m_Layer: 6
   m_Name: MapBoundary
   m_TagString: Untagged
@@ -108,6 +109,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7594478983715109663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412269007697939983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93587eb304d737d4db22819327442c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapGenerationMap: {fileID: 0}
+  asteroid: {fileID: 1492807361553081888, guid: e05204e4b98fedc459fb5814fc9f420f, type: 3}
+  enemies: {fileID: 7072923985897653423, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
+  destination: {fileID: 8188913933704536551, guid: 7d9077bec29e47d45a10cb2e50e2cb60, type: 3}
+  player: {fileID: 0}
+  numberOfAsteroids: 250
+  numberOfEnemies: 30
+  radiusCheck: 5
 --- !u!1 &5811241204369664892
 GameObject:
   m_ObjectHideFlags: 0
