@@ -28,6 +28,8 @@ public class Health : MonoBehaviour
         curHealth -= damage;
         OnTakeDamage?.Invoke();
 
+        DynamicWorldText.Instance.ShowActionText(transform.position + Vector3.back, Color.red, $"-{damage}", 0.4f);
+
         if (curHealth <= 0)
         {
             OnDie?.Invoke();

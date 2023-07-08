@@ -175,6 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0e83312159743f4d88ae8dc118a8027, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 20
-  hitPowerMultiplier: 3
+  movePower: 20
+  pushPowerMultiplier: 15
+  takeDamageSpeedThreshold: 5
   rb: {fileID: 1492807361553081891}
+  health: {fileID: 0}

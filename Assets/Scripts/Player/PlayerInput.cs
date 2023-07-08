@@ -27,6 +27,12 @@ public class PlayerInput : MonoBehaviour
             Vector2 direction = new Vector2(h, v);
             direction.Normalize();
             asteroid.ApplyForce(direction);
+
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                asteroid.ApplyBoostForce(direction);
+            }
         }
     }
 
