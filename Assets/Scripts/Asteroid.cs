@@ -32,4 +32,9 @@ public class Asteroid : MonoBehaviour
             contactPoint.rigidbody.velocity = Vector2.zero;
         }
     }
+
+    public float GetSpeed()
+    {
+        return 50f; // change later
+    }
 }
