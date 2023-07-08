@@ -872,6 +872,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 817824144205827959, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7072923985897653423, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -879,6 +883,10 @@ PrefabInstance:
     - target: {fileID: 7072923985897653423, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7072923985897653424, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
+      propertyPath: enemySpeedForce
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7072923985897653425, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
       propertyPath: m_RootOrder

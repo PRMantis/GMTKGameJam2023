@@ -92,7 +92,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -214,7 +214,7 @@ MonoBehaviour:
   enemyHitbox: {fileID: 7072923985897653427}
   enemyAttackRange: {fileID: 7072923985897653426}
   enemyRb: {fileID: -8721071334092336603}
-  enemySpeedForce: 10
+  enemySpeedForce: 5
   laserBolt: {fileID: 8368444365474616885, guid: 43b9ff723d92b5e48815794fe77a87ff, type: 3}
   minimumCollisionSpeed: 51
   gunBarrel: {fileID: 1343482038445531505}
@@ -338,7 +338,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 50
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0

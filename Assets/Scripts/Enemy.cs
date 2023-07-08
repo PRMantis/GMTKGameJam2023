@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     private float timeTillShots = 2f;
 
     private float timeTillLastMovement = 3f;
-    private float rateOfMovement = 3f;
+    private float rateOfMovement = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -44,20 +44,24 @@ public class Enemy : MonoBehaviour
 
     private void Attack(GameObject target)
     {
-        timeSinceLastShot = 0f;
-        var laserBoltNew = Instantiate(laserBolt, gunBarrel.transform.position, laserBolt.transform.rotation);
-        laserBoltNew.GetComponent<LaserBoltScript>().target = target;
+        if(timeSinceLastShot >= timeTillShots)
+        {
+            timeSinceLastShot = 0f;
+            var laserBoltNew = Instantiate(laserBolt, gunBarrel.transform.position, laserBolt.transform.rotation);
+            laserBoltNew.GetComponent<LaserBoltScript>().target = target;
+        }
+
     }
 
     //Colliders
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Asteroid" && timeSinceLastShot >= timeTillShots)
+        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Asteroid")
         {
             var direction = collision.gameObject.transform.position;
             direction.Normalize();
 
-            RotateTowardsEnemy(collision.gameObject.transform.position);
+            //RotateTowardsEnemy(collision.gameObject.transform.position);
             Attack(collision.gameObject);
         }
     }
@@ -84,6 +88,9 @@ public class Enemy : MonoBehaviour
         if(timeTillLastMovement >= rateOfMovement)
         {
             var randomSpot = GetRandomSpotInBounds();
+
+            enemyRb.velocity = Vector2.zero; //so that it stops moving
+            enemyRb.angularVelocity = 0; //so that it stops moving
 
             randomSpot.Normalize();
             enemyRb.AddForce(randomSpot * enemySpeedForce, ForceMode2D.Force);

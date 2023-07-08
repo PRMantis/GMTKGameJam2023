@@ -50,6 +50,9 @@ public class LaserBoltScript : MonoBehaviour
     public void GoToTarget()
     {
         RotateTowardsEnemy(lastPosition);
+        laserboltRb.velocity = Vector2.zero; //so that it stops moving
+        laserboltRb.angularVelocity = 0; //so that it stops moving
+
         laserboltRb.AddForce((lastPosition - (Vector2)transform.position.normalized) * boltForce);
     }
 
