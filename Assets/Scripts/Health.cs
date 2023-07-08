@@ -6,7 +6,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public Action OnDie;
-    public Action OnTakeDamage;
+    public Action<int> OnTakeDamage;
 
     [SerializeField] private int maxHealth = 100;
 
@@ -23,10 +23,20 @@ public class Health : MonoBehaviour
         curHealth = health;
     }
 
+    public int GetMaxHealth()
+    {
+        return maxHealth;
+    }
+
+    public int GetHealth()
+    {
+        return curHealth;
+    }
+
     public void TakeDamage(int damage)
     {
         curHealth -= damage;
-        OnTakeDamage?.Invoke();
+        OnTakeDamage?.Invoke(damage);
 
         DynamicWorldText.Instance.ShowActionText(transform.position + Vector3.back, Color.red, $"-{damage}", 0.4f);
 

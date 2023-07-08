@@ -230,6 +230,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1492807361553081893, guid: e05204e4b98fedc459fb5814fc9f420f, type: 3}
+      propertyPath: health
+      value: 
+      objectReference: {fileID: 706825857607066208}
+    - target: {fileID: 1492807361553081893, guid: e05204e4b98fedc459fb5814fc9f420f, type: 3}
       propertyPath: moveBoostPower
       value: 100
       objectReference: {fileID: 0}
@@ -251,6 +255,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8693988606468218811}
   m_SourcePrefab: {fileID: 100100000, guid: e05204e4b98fedc459fb5814fc9f420f, type: 3}
+--- !u!114 &706825857607066208 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1492807361553081894, guid: e05204e4b98fedc459fb5814fc9f420f, type: 3}
+  m_PrefabInstance: {fileID: 2123625610265707590}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706825857607066214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ca1130105a343438e14d8bd7dde34f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &706825857607066211 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1492807361553081893, guid: e05204e4b98fedc459fb5814fc9f420f, type: 3}
@@ -285,6 +300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroid: {fileID: 706825857607066211}
+  player: {fileID: 8693988606468218811}
 --- !u!114 &8693988606468218811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,3 +313,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4712146212ef3004c8fb3952a73218cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boostRechargeTime: 2
