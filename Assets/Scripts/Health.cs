@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
 
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private int curHealth;
+    [SerializeField] private float hitVolume = 1f;
 
     [Header("Sounds")]
     [SerializeField] private AudioClip[] takehitSounds;
@@ -51,7 +52,7 @@ public class Health : MonoBehaviour
         }
         else
         {
-            SoundManager.Instance.PlaySound(takehitSounds, transform.position, SoundManager.Instance.GetAudioMixerGroup(AudioGroup.SFX));
+            SoundManager.Instance.PlaySound(takehitSounds, transform.position, SoundManager.Instance.GetAudioMixerGroup(AudioGroup.SFX), volume: hitVolume);
         }
     }
 }
