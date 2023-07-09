@@ -413,6 +413,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 15
   curHealth: 0
+  dieVolume: 0.6
+  hitVolume: 0.7
   takehitSounds:
   - {fileID: 8300000, guid: 550c261b78ab91146b86c6eac8b5c422, type: 3}
   - {fileID: 8300000, guid: 06f2e2dc12ff6144d83130db27b4e70e, type: 3}

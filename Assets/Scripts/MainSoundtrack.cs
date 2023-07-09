@@ -8,6 +8,7 @@ public class MainSoundtrack : MonoBehaviour
 
     void Start()
     {
-        SoundManager.Instance.PlaySound(soundtrack, Camera.main.transform, SoundManager.Instance.GetAudioMixerGroup(AudioGroup.Music), isLooping: true);
+        SoundManager.Instance.PlaySound(soundtrack, Camera.main.transform,
+            SoundManager.Instance.GetAudioMixerGroup(AudioGroup.Music), isLooping: true, volume: 0.5f);
     }
 }

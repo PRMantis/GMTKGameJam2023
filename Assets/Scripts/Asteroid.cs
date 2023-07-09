@@ -54,7 +54,7 @@ public class Asteroid : MonoBehaviour
         Health health = collision.transform.GetComponent<Health>();
 
         //asteroid pushing
-        if (collision.gameObject.GetComponent<Player>() != null)//player doesn't take damage
+        if (collision.gameObject.GetComponent<Player>() != null)
         {
             ContactPoint2D contactPoint = collision.GetContact(0);
             float power = collisionMagnitude * pushPowerMultiplier;
@@ -62,9 +62,10 @@ public class Asteroid : MonoBehaviour
             rb.AddForce(power * contactPoint.normal, ForceMode2D.Impulse);
             contactPoint.rigidbody.velocity = Vector2.zero;
         }
-        else if (health != null && collisionMagnitude > takeDamageSpeedThreshold)//damage of asteroids
+
+        if (health != null && collisionMagnitude > takeDamageSpeedThreshold)//damage of asteroids
         {
-            int damage = Mathf.RoundToInt(collisionMagnitude / 2) * 2;
+            int damage = Mathf.RoundToInt(collisionMagnitude / 2);
             health.TakeDamage(damage);
             Debug.Log($"{collision.gameObject.name} takes damage: {damage}");
         }
