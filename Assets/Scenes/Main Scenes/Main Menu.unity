@@ -1296,8 +1296,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -242, y: 315}
-  m_SizeDelta: {x: 760.072, y: 184.959}
+  m_AnchoredPosition: {x: -242, y: 291.57028}
+  m_SizeDelta: {x: 760.072, y: 231.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &354629349
 GameObject:
@@ -6503,7 +6503,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'WASD - Movement
 
-    Space - Boost'
+    Space - Boost
+
+    Esc - Pause'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0254fb3a6850d3f46a7538d323bb4cfe, type: 2}
   m_sharedMaterial: {fileID: 3086102509571144236, guid: 0254fb3a6850d3f46a7538d323bb4cfe, type: 2}
@@ -6530,7 +6532,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 68.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
