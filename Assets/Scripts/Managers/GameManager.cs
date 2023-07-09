@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum GameState
 {
-    None,
+    Paused,
     Running,
     GameEnd
 }
@@ -45,6 +45,15 @@ public class GameManager : MonoBehaviour
     {
         gameState = state;
         OnGameStateChange?.Invoke(state);
+
+        if (state == GameState.Paused)
+        {
+            Time.timeScale = 0.0f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+        }
     }
 
     public GameState GetGameState()
@@ -66,6 +75,22 @@ public class GameManager : MonoBehaviour
     public bool IsGameWon()
     {
         return isGameWon;
+    }
+
+    public void TryPauseGame()
+    {
+        if (gameState == GameState.Running)
+        {
+            SetGameState(GameState.Paused);
+        }
+    }
+
+    public void UnPauseGame()
+    {
+        if (gameState == GameState.Paused)
+        {
+            SetGameState(GameState.Running);
+        }
     }
 
     public void GameEnd(bool hasWon)

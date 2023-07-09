@@ -7,12 +7,14 @@ public class GameUI : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject gameWonPanel;
+    [SerializeField] private GameObject pausedPanel;
 
     void Start()
     {
         GameManager.Instance.OnGameStateChange += OnGameStateChange;
         gameOverPanel.SetActive(false);
         gameWonPanel.SetActive(false);
+        pausedPanel.SetActive(false);
     }
 
     private void OnDestroy()
@@ -24,13 +26,14 @@ public class GameUI : MonoBehaviour
     {
         switch (state)
         {
-            case GameState.None:
-
+            case GameState.Paused:
+                pausedPanel.SetActive(true);
                 break;
             case GameState.Running:
-
+                pausedPanel.SetActive(false);
                 break;
             case GameState.GameEnd:
+                pausedPanel.SetActive(false);
                 if (GameManager.Instance.IsGameWon())
                 {
                     gameWonPanel.SetActive(true);
@@ -48,8 +51,13 @@ public class GameUI : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    public void OnPressBack()
+    public void OnPressExit()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void OnPressBack()
+    {
+        GameManager.Instance.UnPauseGame();
     }
 }

@@ -39,6 +39,11 @@ public class PlayerInput : MonoBehaviour
             {
                 player.TryBoost(direction);
             }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameManager.Instance.TryPauseGame();
+            }
         }
     }
 
