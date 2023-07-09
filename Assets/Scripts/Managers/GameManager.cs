@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player player;//redo into spawned from script player
 
     private GameState gameState;
+    private bool isGameWon;
 
     private void Awake()
     {
@@ -62,8 +63,14 @@ public class GameManager : MonoBehaviour
         return player;
     }
 
+    public bool IsGameWon()
+    {
+        return isGameWon;
+    }
+
     public void GameEnd(bool hasWon)
     {
+        isGameWon = hasWon;
         SetGameState(GameState.GameEnd);
         Debug.Log($"game ends, did win: {hasWon}");
         //game ends
