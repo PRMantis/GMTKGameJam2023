@@ -5,6 +5,7 @@ using UnityEngine;
 public class DestinationPlanet : MonoBehaviour
 {
     [SerializeField] private ParticleSystem explosionPrefab;
+    [SerializeField] private SpriteRenderer mainPlanetRend;
 
 
     private void Awake()
@@ -22,8 +23,10 @@ public class DestinationPlanet : MonoBehaviour
         //particle explosion
         if (explosionPrefab != null)
         {
-            Destroy(Instantiate(explosionPrefab, hitPoint, Quaternion.identity), 2);
+            Destroy(Instantiate(explosionPrefab, new Vector3(hitPoint.x, hitPoint.y, -8), Quaternion.identity), 20);
         }
+
+        mainPlanetRend.color = Color.red;
 
         GameManager.Instance.GameEnd(true);
     }
