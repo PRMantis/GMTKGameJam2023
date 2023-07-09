@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DestinationPlanet : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem explosionPrefab;
+
 
     private void Awake()
     {
@@ -15,9 +17,14 @@ public class DestinationPlanet : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnPlayerHitsPlanet(Vector2 hitPoint)
     {
-        
+        //particle explosion
+        if (explosionPrefab != null)
+        {
+            Destroy(Instantiate(explosionPrefab, hitPoint, Quaternion.identity), 2);
+        }
+
+        GameManager.Instance.GameEnd(true);
     }
 }

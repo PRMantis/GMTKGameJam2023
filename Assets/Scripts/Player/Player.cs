@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(PlayerInput))]
@@ -17,7 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float boostRechargeTime = 2;//in seconds
 
     [Header("Sounds")]
-    [SerializeField] private AudioClip breakSound;//in seconds
+    [SerializeField] private AudioClip breakSound;
 
     private float boostPower;
     private PlayerInput input;
@@ -90,7 +89,10 @@ public class Player : MonoBehaviour
 
                     healthIndicators[i].SetActive(false);
 
-                    SoundManager.Instance.PlaySound(breakSound, transform.position, SoundManager.Instance.GetAudioMixerGroup(AudioGroup.SFX));
+                    if (curHealth > 0)
+                    {
+                        SoundManager.Instance.PlaySound(breakSound, transform.position, SoundManager.Instance.GetAudioMixerGroup(AudioGroup.SFX));
+                    }
                 }
             }
         }

@@ -340,11 +340,11 @@ MonoBehaviour:
   enemyHitbox: {fileID: 7072923985897653427}
   enemyAttackRange: {fileID: 5063909313394990867}
   enemyRb: {fileID: -8721071334092336603}
-  enemySpeedForce: 120
   laserBolt: {fileID: 8368444365474616885, guid: 43b9ff723d92b5e48815794fe77a87ff, type: 3}
-  minimumCollisionSpeed: 51
   gunBarrel: {fileID: 1343482038445531505}
   flightZone: {fileID: 817824144205827959}
+  enemySpeedForce: 100
+  minimumCollisionSpeed: 3
   timeSinceLastShot: 0
   timeTillShots: 2
   timeTillLastMovement: 0
@@ -411,9 +411,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ca1130105a343438e14d8bd7dde34f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 15
   curHealth: 0
-  takehitSound: {fileID: 0}
+  takehitSounds:
+  - {fileID: 8300000, guid: 550c261b78ab91146b86c6eac8b5c422, type: 3}
+  - {fileID: 8300000, guid: 06f2e2dc12ff6144d83130db27b4e70e, type: 3}
+  - {fileID: 8300000, guid: e49b5840a87421747a5724dfe5588a66, type: 3}
+  - {fileID: 8300000, guid: 41d6306baffc6bf4a91aee00ffb3b9a3, type: 3}
+  - {fileID: 8300000, guid: 04691c8dd4e4aec409aca44fcccc441c, type: 3}
+  dieSounds:
+  - {fileID: 8300000, guid: d379648c39f9f5449b9a94623df73e19, type: 3}
 --- !u!50 &-8721071334092336603
 Rigidbody2D:
   serializedVersion: 4

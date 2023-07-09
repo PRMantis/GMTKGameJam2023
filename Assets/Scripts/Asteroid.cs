@@ -14,8 +14,15 @@ public class Asteroid : MonoBehaviour
     [SerializeField] private float takeDamageSpeedThreshold = 4.5f;
 
     [Header("References")]
+    [SerializeField] private ParticleSystem hitPrefab;
+    [SerializeField] private ParticleSystem explosionPrefab;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Health health;
+
+    //[Header("Sounds")]
+    //[SerializeField] private AudioClip breakSound;
+
+    private bool isPlayer = false;
 
     private void Awake()
     {
@@ -28,6 +35,64 @@ public class Asteroid : MonoBehaviour
         {
             health = GetComponent<Health>();
         }
+
+        health.OnDie += OnDie;
+        health.OnTakeDamage += TakeDamage;
+
+        isPlayer = GetComponent<Player>() != null;
+    }
+
+    private void OnDestroy()
+    {
+        health.OnDie -= OnDie;
+        health.OnTakeDamage -= TakeDamage;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        float collisionMagnitude = collision.relativeVelocity.magnitude;
+        Health health = collision.transform.GetComponent<Health>();
+
+        //asteroid pushing
+        if (collision.gameObject.GetComponent<Player>() != null)//player doesn't take damage
+        {
+            ContactPoint2D contactPoint = collision.GetContact(0);
+            float power = collisionMagnitude * pushPowerMultiplier;
+
+            rb.AddForce(power * contactPoint.normal, ForceMode2D.Impulse);
+            contactPoint.rigidbody.velocity = Vector2.zero;
+        }
+        else if (health != null && collisionMagnitude > takeDamageSpeedThreshold)//damage of asteroids
+        {
+            int damage = Mathf.RoundToInt(collisionMagnitude / 2) * 2;
+            health.TakeDamage(damage);
+            Debug.Log($"{collision.gameObject.name} takes damage: {damage}");
+        }
+
+        DestinationPlanet destinationPlanet = collision.transform.GetComponentInParent<DestinationPlanet>();
+        if (destinationPlanet != null && isPlayer)
+        {
+            this.health.TakeDamage(this.health.GetHealth());//destroy player
+            destinationPlanet.OnPlayerHitsPlanet(collision.GetContact(0).point);
+        }
+    }
+
+    private void OnDie()
+    {
+        if (explosionPrefab != null)
+        {
+            Destroy(Instantiate(explosionPrefab, transform.position, Quaternion.identity), 2);
+        }
+
+        Destroy(gameObject);
+    }
+
+    private void TakeDamage(int damage)
+    {
+        if (hitPrefab != null)
+        {
+            Destroy(Instantiate(hitPrefab, transform.position, Quaternion.identity), 2);
+        }
     }
 
     public void ApplyForce(Vector2 direction)
@@ -38,35 +103,5 @@ public class Asteroid : MonoBehaviour
     public void ApplyBoostForce(Vector2 direction)
     {
         rb.AddForce(direction * moveBoostPower, ForceMode2D.Impulse);
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        float collisionMagnitude = collision.relativeVelocity.magnitude;
-        Health health = collision.transform.GetComponent<Health>();
-
-        //damage of asteroids
-        if (health != null && collisionMagnitude > takeDamageSpeedThreshold)
-        {
-            int damage = Mathf.RoundToInt(collisionMagnitude / 2) * 2;
-            health.TakeDamage(damage);
-            //this.health.TakeDamage(damage);
-            Debug.Log($"{collision.gameObject.name} takes damage: {damage}");
-        }
-
-        //asteroid pushing
-        if (collision.gameObject.GetComponent<Player>() != null)
-        {
-            ContactPoint2D contactPoint = collision.GetContact(0);
-            float power = collisionMagnitude * pushPowerMultiplier;
-
-            rb.AddForce(power * contactPoint.normal, ForceMode2D.Impulse);
-            contactPoint.rigidbody.velocity = Vector2.zero;
-        }
-    }
-
-    public float GetSpeed()
-    {
-        return 50f; // change later
     }
 }

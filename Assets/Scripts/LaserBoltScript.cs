@@ -9,6 +9,9 @@ public class LaserBoltScript : MonoBehaviour
 
     [SerializeField] public float boltForce = 100f;
 
+    [Header("Sounds")]
+    [SerializeField] public AudioClip[] shootSound;
+
     public GameObject target;
 
     private Vector2 lastPosition; //so that it only goes in straight line
@@ -28,6 +31,8 @@ public class LaserBoltScript : MonoBehaviour
         laserboltRb = GetComponent<Rigidbody2D>();
 
         GoToTarget();
+
+        SoundManager.Instance.PlaySound(shootSound, transform.position, SoundManager.Instance.GetAudioMixerGroup(AudioGroup.SFX));
     }
 
     private void Update()
@@ -37,7 +42,7 @@ public class LaserBoltScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!collision.isTrigger)
+        if (!collision.isTrigger)
         {
             if (collision.gameObject.TryGetComponent(out Health health))
             {

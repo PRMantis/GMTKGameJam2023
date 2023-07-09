@@ -124,8 +124,8 @@ MonoBehaviour:
   mapGenerationMap: {fileID: 0}
   asteroid: {fileID: 1492807361553081888, guid: e05204e4b98fedc459fb5814fc9f420f, type: 3}
   enemies: {fileID: 7072923985897653423, guid: 431dfbc200a5c9042a7fffd0cd2528a1, type: 3}
-  destination: {fileID: 8188913933704536551, guid: 7d9077bec29e47d45a10cb2e50e2cb60, type: 3}
-  player: {fileID: 0}
+  destination: {fileID: 851035728651564149, guid: 3bdee41775186564f94a25cc7f334107, type: 3}
+  player: {fileID: 706825857607066214, guid: de043fc9d913fee44aa63262b4f3c859, type: 3}
   numberOfAsteroids: 250
   numberOfEnemies: 30
   radiusCheck: 5

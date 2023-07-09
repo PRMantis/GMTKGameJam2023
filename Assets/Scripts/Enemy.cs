@@ -2,19 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Health))]
 public class Enemy : MonoBehaviour
 {
     public PolygonCollider2D enemyHitbox;
     public CircleCollider2D enemyAttackRange;
     public Rigidbody2D enemyRb;
-
-    [SerializeField] public float enemySpeedForce = 50f;
-
     public GameObject laserBolt;
-    [SerializeField] public float minimumCollisionSpeed = 51f;
-
     public GameObject gunBarrel;
     public BoxCollider2D flightZone;
+
+    [SerializeField] private float enemySpeedForce = 50f;
+    [SerializeField] private float minimumCollisionSpeed = 3f;
 
     [SerializeField] private float timeSinceLastShot = 2f;
     [SerializeField] private float timeTillShots = 2f;
@@ -26,10 +25,26 @@ public class Enemy : MonoBehaviour
     [SerializeField] float maxDistanceUntilStopChase = 200f;
 
     private EnemyStates enemyState;
-    // Start is called before the first frame update
+    private Health health;
+
+    private void Awake()
+    {
+        if (health == null)
+        {
+            health = GetComponent<Health>();
+        }
+
+        health.OnDie += OnDie;
+    }
+
     void Start()
     {
         enemyState = EnemyStates.IsMoving;
+    }
+
+    private void OnDestroy()
+    {
+        health.OnDie -= OnDie;
     }
 
     // Update is called once per frame
@@ -37,7 +52,7 @@ public class Enemy : MonoBehaviour
     {
         CalculateTimes();
 
-        if(enemyState == EnemyStates.IsMoving || enemyState == EnemyStates.IsChasingPlayer)
+        if (enemyState == EnemyStates.IsMoving || enemyState == EnemyStates.IsChasingPlayer)
         {
             EnemyMovement();
         }
@@ -45,7 +60,7 @@ public class Enemy : MonoBehaviour
         {
             Attack(attackTarget);
         }
-        if(enemyState == EnemyStates.IsChasingPlayer)
+        if (enemyState == EnemyStates.IsChasingPlayer)
         {
             if (Vector2.Distance(transform.position, attackTarget.transform.position) >= maxDistanceUntilStopChase)
             {
@@ -54,24 +69,6 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
-    private void Attack(GameObject target)
-    {
-        if(target == null)
-        {
-            ChangeState(EnemyStates.IsMoving);
-        }
-        var rotation = RotateTowardsPoint(target.transform.position);
-        if (timeSinceLastShot >= timeTillShots)
-        {
-            timeSinceLastShot = 0f;
-            var laserBoltNew = Instantiate(laserBolt, gunBarrel.transform.position, rotation);
-            laserBoltNew.GetComponent<LaserBoltScript>().target = target;
-            laserBoltNew.GetComponent<LaserBoltScript>().rotation = rotation;
-        }
-
-    }
-
 
     //Colliders
     private void OnTriggerEnter2D(Collider2D collision)
@@ -92,10 +89,9 @@ public class Enemy : MonoBehaviour
 
     }
 
-
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Asteroid")
+        if (collision.gameObject.tag == "Asteroid")
         {
             if (enemyState == EnemyStates.IsAttackingAsteroid)
             {
@@ -114,6 +110,44 @@ public class Enemy : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out Asteroid asteroid))
+        {
+            float collisionMagnitude = collision.relativeVelocity.magnitude;
+
+            if (health != null && collisionMagnitude > minimumCollisionSpeed)
+            {
+                int damage = Mathf.RoundToInt(collisionMagnitude / 2) * 5;
+                health.TakeDamage(damage);
+
+                Debug.Log($"{gameObject.name} takes damage: {damage}");
+            }
+        }
+    }
+
+    private void OnDie()
+    {
+        Destroy(gameObject);
+    }
+
+    private void Attack(GameObject target)
+    {
+        if (target == null)
+        {
+            ChangeState(EnemyStates.IsMoving);
+        }
+        var rotation = RotateTowardsPoint(target.transform.position);
+        if (timeSinceLastShot >= timeTillShots)
+        {
+            timeSinceLastShot = 0f;
+            var laserBoltNew = Instantiate(laserBolt, gunBarrel.transform.position, rotation);
+            laserBoltNew.GetComponent<LaserBoltScript>().target = target;
+            laserBoltNew.GetComponent<LaserBoltScript>().rotation = rotation;
+        }
+
+    }
+
     private Quaternion RotateTowardsPoint(Vector2 movementDirection)
     {
         Vector2 difference = movementDirection - (Vector2)transform.position;
@@ -121,17 +155,6 @@ public class Enemy : MonoBehaviour
         var offset = -90f;
         transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ + offset);
         return transform.rotation;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.TryGetComponent(out Asteroid asteroid))
-        {
-            if(asteroid.GetSpeed() >= minimumCollisionSpeed)
-            {
-                Destroy(gameObject);
-            }
-        }
     }
 
     private void EnemyMovement(bool overrideOnCollision = false)
@@ -147,7 +170,7 @@ public class Enemy : MonoBehaviour
         }
         else if ((timeTillLastMovement >= rateOfMovement) || overrideOnCollision)
         {
-            if(enemyState == EnemyStates.IsMoving)
+            if (enemyState == EnemyStates.IsMoving)
             {
                 var randomSpot = GetRandomSpotInBounds();
                 RotateTowardsPoint(randomSpot);

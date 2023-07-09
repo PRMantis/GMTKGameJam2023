@@ -211,8 +211,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c146c6385e8ed41be7fbe2563c6086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserDamange: 20
+  laserDamange: 10
   boltForce: 9
+  shootSound:
+  - {fileID: 8300000, guid: f71487aecdad1a9458298b1eba7e3e34, type: 3}
+  - {fileID: 8300000, guid: 9e44c0adfdf8f50459324f7e1b245750, type: 3}
+  - {fileID: 8300000, guid: 78c954738f5d863408110555876babde, type: 3}
+  - {fileID: 8300000, guid: 943c940d91218814aad0308a88f45c53, type: 3}
+  - {fileID: 8300000, guid: 15d1da282ebe99341a2aa4dce3d469f3, type: 3}
   target: {fileID: 0}
   rotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!61 &-8961751361589542688

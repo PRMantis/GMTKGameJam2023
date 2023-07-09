@@ -54,30 +54,32 @@ public class MapGeneration : MonoBehaviour
 
             return new Vector2(randomX, randomY);
         }
-        void TryCreateObject(GameObject obj, bool changeLocation = false)
+
+        GameObject TryCreateObject(GameObject obj, bool changeLocation = false)
         {
             var randomPoint = GetRandomPoint();
             var check = Physics2D.OverlapCircle(randomPoint, radiusCheck, LayerMask.GetMask("Default"));
 
-            if(check != null)
+            if (check != null)
             {
-                TryCreateObject(obj);
+                return TryCreateObject(obj);
             }
             else
             {
-                if(changeLocation)
+                if (changeLocation)
                 {
                     obj.transform.position = randomPoint;
+                    return null;
                 }
                 else
                 {
-                    Instantiate(obj, randomPoint, obj.transform.rotation);
+                    return Instantiate(obj, randomPoint, obj.transform.rotation);
                 }
             }
         }
-        
+
         //First generate asteroid
-        for(int i = 0; i< numberOfAsteroids; i++)
+        for (int i = 0; i < numberOfAsteroids; i++)
         {
             TryCreateObject(asteroid);
         }
@@ -88,10 +90,16 @@ public class MapGeneration : MonoBehaviour
         }
 
         AddPlayerAndDestination();
+
         void AddPlayerAndDestination()
         {
-            TryCreateObject(player, true);
+            GameObject playerObject = TryCreateObject(player, true);
             TryCreateObject(destination);
+
+            if (playerObject != null)
+            {
+                GameManager.Instance.SetPlayer(playerObject.GetComponent<Player>());
+            }
         }
     }
 

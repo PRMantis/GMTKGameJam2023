@@ -20,11 +20,17 @@ public class Indicator : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GameManager.Instance.GetPlayer();
     }
 
     void Update()
     {
+        if (player == null)
+        {
+            player = GameManager.Instance.GetPlayer();
+            return;
+        }
+
         Vector3 targetDirection = transform.position - player.transform.position;
         float distanceToTarget = targetDirection.magnitude;
 

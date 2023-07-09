@@ -1,6 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameCamera : MonoBehaviour
@@ -19,11 +17,6 @@ public class GameCamera : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    void Start()
-    {
-        //SetFollowTarget();
     }
 
     public void SetFollowTarget(Transform target)
