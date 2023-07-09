@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,20 +9,23 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject gameWonPanel;
     [SerializeField] private GameObject pausedPanel;
-    [SerializeField] private GameObject scoreText;
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text gameWonscoreText;
 
     void Start()
     {
         GameManager.Instance.OnGameStateChange += OnGameStateChange;
+        GameManager.Instance.OnScoreChange += OnScoreChanged;
         gameOverPanel.SetActive(false);
         gameWonPanel.SetActive(false);
         pausedPanel.SetActive(false);
-        scoreText.SetActive(true);
+        scoreText.gameObject.SetActive(true);
     }
 
     private void OnDestroy()
     {
         GameManager.Instance.OnGameStateChange -= OnGameStateChange;
+        GameManager.Instance.OnScoreChange -= OnScoreChanged;
     }
 
     private void OnGameStateChange(GameState state)
@@ -36,7 +40,7 @@ public class GameUI : MonoBehaviour
                 break;
             case GameState.GameEnd:
                 pausedPanel.SetActive(false);
-                scoreText.SetActive(false);
+                scoreText.gameObject.SetActive(false);
                 if (GameManager.Instance.IsGameWon())
                 {
                     gameWonPanel.SetActive(true);
@@ -47,6 +51,12 @@ public class GameUI : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    private void OnScoreChanged(int score)
+    {
+        scoreText.text = $"Score :{score}";
+        gameWonscoreText.text = $"Score :{score}";
     }
 
     public void OnPressRestart()

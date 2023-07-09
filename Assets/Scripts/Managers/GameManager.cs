@@ -14,15 +14,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public Action<GameState> OnGameStateChange;
+    public Action<int> OnScoreChange;
 
     [SerializeField] private GameCamera gameCamera;
     [SerializeField] private Player player;//redo into spawned from script player
 
     private GameState gameState;
     private bool isGameWon;
-
-    public GameObject scoreText;
-    public GameObject gameWonText;
 
     private int score = 0;
 
@@ -111,7 +109,6 @@ public class GameManager : MonoBehaviour
     public void IncreaseScore()
     {
         score += 1;
-        scoreText.GetComponent<TextMeshProUGUI>().text = $"Score :{score}";
-        gameWonText.GetComponent<TextMeshProUGUI>().text = $"Score :{score}";
+        OnScoreChange?.Invoke(score);
     }
 }
