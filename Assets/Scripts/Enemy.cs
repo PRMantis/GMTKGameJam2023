@@ -76,14 +76,14 @@ public class Enemy : MonoBehaviour
     //Colliders
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (enemyState == EnemyStates.IsMoving && collision.gameObject.tag == "Asteroid")
+        if (enemyState == EnemyStates.IsMoving && collision.gameObject.CompareTag("Asteroid"))
         {
             ChangeState(EnemyStates.IsAttackingAsteroid);
             attackTarget = collision.gameObject;
         }
         else if (enemyState == EnemyStates.IsMoving || enemyState == EnemyStates.IsAttackingAsteroid || enemyState == EnemyStates.IsChasingPlayer)
         {
-            if (collision.gameObject.tag == "Player")
+            if (collision.gameObject.CompareTag("Player"))
             {
                 ChangeState(EnemyStates.IsAttackingPlayer);
                 attackTarget = collision.gameObject;
@@ -144,9 +144,9 @@ public class Enemy : MonoBehaviour
         if (timeSinceLastShot >= timeTillShots)
         {
             timeSinceLastShot = 0f;
-            var laserBoltNew = Instantiate(laserBolt, gunBarrel.transform.position, rotation);
-            laserBoltNew.GetComponent<LaserBoltScript>().target = target;
-            laserBoltNew.GetComponent<LaserBoltScript>().rotation = rotation;
+            LaserBoltScript laserBoltNew = Instantiate(laserBolt, gunBarrel.transform.position, rotation).GetComponent<LaserBoltScript>();
+            laserBoltNew.target = target;
+            laserBoltNew.rotation = rotation;
         }
 
     }

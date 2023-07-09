@@ -14,11 +14,15 @@ public class Player : MonoBehaviour
     [SerializeField] private ParticleSystem asteroidBreakParticles;
     [SerializeField] private List<GameObject> healthIndicators;
     [SerializeField] private float boostRechargeTime = 2;//in seconds
+    [SerializeField] private float boostCooldownTime = 0.8f;//in seconds
 
     [Header("Sounds")]
     [SerializeField] private AudioClip breakSound;
+    [SerializeField] private AudioClip[] boostSounds;
 
+    private float boostCooldown;
     private float boostPower;
+    private bool canBoost = false;
     private PlayerInput input;
     private Asteroid asteroid;
     private int healthPartsCount;
@@ -55,6 +59,16 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (!canBoost)
+        {
+            boostCooldown += Time.deltaTime;
+
+            if (boostCooldown >= boostCooldownTime)
+            {
+                canBoost = true;
+                boostCooldown = 0;
+            }
+        }
 
         if (boostPower >= 1)
         {
@@ -105,7 +119,12 @@ public class Player : MonoBehaviour
 
     public void TryBoost(Vector2 direction)
     {
-        asteroid.ApplyBoostForce(direction * boostPower);
-        ChangeBoost(0);
+        if (canBoost)
+        {
+            SoundManager.Instance.PlaySound(boostSounds, transform.position, SoundManager.Instance.GetAudioMixerGroup(AudioGroup.SFX));
+            canBoost = false;
+            asteroid.ApplyBoostForce(direction * boostPower);
+            ChangeBoost(0);
+        }
     }
 }

@@ -13,6 +13,9 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private GameObject OptionsMenu;
     [SerializeField] private GameObject HowToPlayMenu;
 
+    [Header("Other")]
+    [SerializeField] private GameObject GameName;
+
     public void OnPressPlay()
     {
         SceneManager.LoadScene(1);
@@ -25,6 +28,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void SetButtonState(bool enabled)
     {
+        GameName.SetActive(enabled);
         PlayButton.SetActive(enabled);
         OptionsButton.SetActive(enabled);
         HowToPlayButton.SetActive(enabled);

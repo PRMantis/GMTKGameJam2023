@@ -5703,6 +5703,7 @@ MonoBehaviour:
   HowToPlayButton: {fileID: 1844999906}
   OptionsMenu: {fileID: 1375788629}
   HowToPlayMenu: {fileID: 37997246}
+  GameName: {fileID: 155634502}
 --- !u!1001 &1712449037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8266,7 +8267,9 @@ MonoBehaviour:
   - {fileID: 7761897666399714731}
   - {fileID: 8162940273078622163}
   boostRechargeTime: 2
+  boostCooldownTime: 0.8
   breakSound: {fileID: 8300000, guid: fcb1bed91ef8742408837f00f447a01b, type: 3}
+  boostSounds: []
 --- !u!95 &8934542007782057964
 Animator:
   serializedVersion: 5

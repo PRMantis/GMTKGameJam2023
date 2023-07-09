@@ -1532,11 +1532,11 @@ PrefabInstance:
       objectReference: {fileID: 706825857607066208}
     - target: {fileID: 1492807361553081893, guid: e05204e4b98fedc459fb5814fc9f420f, type: 3}
       propertyPath: movePower
-      value: 35
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1492807361553081893, guid: e05204e4b98fedc459fb5814fc9f420f, type: 3}
       propertyPath: moveBoostPower
-      value: 100
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 1492807361553081893, guid: e05204e4b98fedc459fb5814fc9f420f, type: 3}
       propertyPath: pushPowerMultiplier
@@ -1739,4 +1739,10 @@ MonoBehaviour:
   - {fileID: 7560790337799800315}
   - {fileID: 8219642030870474627}
   boostRechargeTime: 2
+  boostCooldownTime: 0.8
   breakSound: {fileID: 8300000, guid: fcb1bed91ef8742408837f00f447a01b, type: 3}
+  boostSounds:
+  - {fileID: 8300000, guid: dd78b44c542e7074a9158fb67c17806d, type: 3}
+  - {fileID: 8300000, guid: 98db6993ec9bf9144906df15d494bf16, type: 3}
+  - {fileID: 8300000, guid: 92184907fa6b04d4eb1b874a6481eacf, type: 3}
+  - {fileID: 8300000, guid: 99608b2d8b7bdac44870b746e6ead44d, type: 3}

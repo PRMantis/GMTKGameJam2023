@@ -72,13 +72,18 @@ public class Asteroid : MonoBehaviour
         DestinationPlanet destinationPlanet = collision.transform.GetComponentInParent<DestinationPlanet>();
         if (destinationPlanet != null && isPlayer)
         {
-            this.health.TakeDamage(this.health.GetHealth());//destroy player
             destinationPlanet.OnPlayerHitsPlanet(collision.GetContact(0).point);
+            this.health.TakeDamage(this.health.GetHealth());//destroy player
         }
     }
 
     private void OnDie()
     {
+        if (isPlayer && GameManager.Instance.GetGameState() != GameState.GameEnd)
+        {
+            GameManager.Instance.GameEnd(false);
+        }
+
         if (explosionPrefab != null)
         {
             Destroy(Instantiate(explosionPrefab, transform.position, Quaternion.identity), 2);

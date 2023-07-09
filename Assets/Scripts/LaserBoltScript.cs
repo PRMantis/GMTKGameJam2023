@@ -30,14 +30,10 @@ public class LaserBoltScript : MonoBehaviour
         transform.LookAt(lastPosition);
         laserboltRb = GetComponent<Rigidbody2D>();
 
+        transform.localRotation = rotation;
         GoToTarget();
 
         SoundManager.Instance.PlaySound(shootSound, transform.position, SoundManager.Instance.GetAudioMixerGroup(AudioGroup.SFX));
-    }
-
-    private void Update()
-    {
-        KeepAxisConsistent();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -49,6 +45,12 @@ public class LaserBoltScript : MonoBehaviour
                 health.TakeDamage(laserDamange);
                 Destroy(gameObject);
             }
+
+            if (collision.transform.parent != null && collision.transform.parent.TryGetComponent(out Health health2))
+            {
+                health2.TakeDamage(laserDamange);
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -56,19 +58,8 @@ public class LaserBoltScript : MonoBehaviour
     {
         laserboltRb.velocity = Vector2.zero; //so that it stops moving
         laserboltRb.angularVelocity = 0; //so that it stops moving
+        laserboltRb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         laserboltRb.AddForce((lastPosition - (Vector2)transform.position).normalized * boltForce, ForceMode2D.Impulse);
-    }
-
-    private void RotateTowardsEnemy(Vector2 direction)
-    {
-        Quaternion toRotation = Quaternion.LookRotation(Vector2.up, direction);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 50f * Time.deltaTime);
-    }
-
-    private void KeepAxisConsistent()
-    {
-        transform.localRotation = rotation;
-        //transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 }
