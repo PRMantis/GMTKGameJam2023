@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5300081226506713738}
   - component: {fileID: 5070255224997592472}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 108687850609037593}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GunBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 4404960645930741221}
   - component: {fileID: 817824144205827959}
   - component: {fileID: 4312867539916874312}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MovementRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: -3431575330602006942}
   - component: {fileID: -8721071334092336603}
   - component: {fileID: 5063909313394990867}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -495,7 +495,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3818836955209220099}
   - component: {fileID: 1034177948905456260}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
