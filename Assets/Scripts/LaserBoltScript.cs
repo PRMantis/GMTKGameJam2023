@@ -25,6 +25,10 @@ public class LaserBoltScript : MonoBehaviour
 
         Destroy(gameObject, 5f); // Destroys itself after five seconds
 
+        if(target == null)
+        {
+            Destroy(gameObject);
+        }
         lastPosition = target.transform.position;
 
         transform.LookAt(lastPosition);
