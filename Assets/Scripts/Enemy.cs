@@ -58,7 +58,10 @@ public class Enemy : MonoBehaviour
         }
         if (enemyState == EnemyStates.IsAttackingAsteroid || enemyState == EnemyStates.IsAttackingPlayer)
         {
-            Attack(attackTarget);
+            if (attackTarget != null)
+            {
+                Attack(attackTarget);
+            }
         }
         if (enemyState == EnemyStates.IsChasingPlayer)
         {
@@ -161,6 +164,12 @@ public class Enemy : MonoBehaviour
     {
         if (enemyState == EnemyStates.IsChasingPlayer)
         {
+            if (attackTarget == null)
+            {
+                enemyState = EnemyStates.IsMoving;
+                return;
+            }
+
             var playerLocation = attackTarget.transform.position;
             RotateTowardsPoint(playerLocation);
             timeTillLastMovement = 0f;
