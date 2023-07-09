@@ -21,6 +21,11 @@ public class PlayerUI : MonoBehaviour
         playerHealth.OnTakeDamage += OnPlayerTakeDamage;
     }
 
+    private void Update()
+    {
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
     private void OnDestroy()
     {
         player.OnBoostChange -= OnBoostChange;
