@@ -8,6 +8,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject gameWonPanel;
     [SerializeField] private GameObject pausedPanel;
+    [SerializeField] private GameObject scoreText;
 
     void Start()
     {
@@ -15,6 +16,7 @@ public class GameUI : MonoBehaviour
         gameOverPanel.SetActive(false);
         gameWonPanel.SetActive(false);
         pausedPanel.SetActive(false);
+        scoreText.SetActive(true);
     }
 
     private void OnDestroy()
@@ -34,6 +36,7 @@ public class GameUI : MonoBehaviour
                 break;
             case GameState.GameEnd:
                 pausedPanel.SetActive(false);
+                scoreText.SetActive(false);
                 if (GameManager.Instance.IsGameWon())
                 {
                     gameWonPanel.SetActive(true);

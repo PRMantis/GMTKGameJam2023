@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     private bool isGameWon;
 
     public GameObject scoreText;
+    public GameObject gameWonText;
+
     private int score = 0;
 
     private void Awake()
@@ -110,5 +112,6 @@ public class GameManager : MonoBehaviour
     {
         score += 1;
         scoreText.GetComponent<TextMeshProUGUI>().text = $"Score :{score}";
+        gameWonText.GetComponent<TextMeshProUGUI>().text = $"Score :{score}";
     }
 }
