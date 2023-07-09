@@ -8,14 +8,9 @@ public class GameUI : MonoBehaviour
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject gameWonPanel;
 
-    private void Awake()
-    {
-        GameManager.Instance.OnGameStateChange += OnGameStateChange;
-    }
-
-
     void Start()
     {
+        GameManager.Instance.OnGameStateChange += OnGameStateChange;
         gameOverPanel.SetActive(false);
         gameWonPanel.SetActive(false);
     }
