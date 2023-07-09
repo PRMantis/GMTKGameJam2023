@@ -1531,6 +1531,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 706825857607066208}
     - target: {fileID: 1492807361553081893, guid: e05204e4b98fedc459fb5814fc9f420f, type: 3}
+      propertyPath: movePower
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1492807361553081893, guid: e05204e4b98fedc459fb5814fc9f420f, type: 3}
       propertyPath: moveBoostPower
       value: 100
       objectReference: {fileID: 0}

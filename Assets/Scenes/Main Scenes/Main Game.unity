@@ -1271,6 +1271,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 412269007697939980, guid: e48b8790098f3ee42842394dfc6af899, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 412269007697939980, guid: e48b8790098f3ee42842394dfc6af899, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 412269007697939980, guid: e48b8790098f3ee42842394dfc6af899, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 412269007697939981, guid: e48b8790098f3ee42842394dfc6af899, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1433,7 +1445,7 @@ PrefabInstance:
       objectReference: {fileID: 1792368947}
     - target: {fileID: 7594478983715109663, guid: e48b8790098f3ee42842394dfc6af899, type: 3}
       propertyPath: numberOfSmallAsteroids
-      value: 500
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 7676677242529817191, guid: e48b8790098f3ee42842394dfc6af899, type: 3}
       propertyPath: m_Layer
