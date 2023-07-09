@@ -116,7 +116,7 @@ public class SoundManager : MonoBehaviour
     #region Sound Options
     private void LoadSoundSettings()
     {
-        SetMainMixerGroupVolume("MainVolume", PlayerPrefs.GetFloat(MainLevelSavedDataString, 1));
+        SetMainMixerGroupVolume("MainVolume", PlayerPrefs.GetFloat(MainLevelSavedDataString, 0.8f));
         SetMainMixerGroupVolume("SFXVolume", PlayerPrefs.GetFloat(SFXLevelSavedDataString, 1));
         SetMainMixerGroupVolume("MusicVolume", PlayerPrefs.GetFloat(MusicLevelSavedDataString, 1));
     }

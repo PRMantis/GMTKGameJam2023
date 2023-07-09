@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
 
     [SerializeField] private int maxHealth = 100;
     [SerializeField] private int curHealth;
+    [SerializeField] private float dieVolume = 1f;
     [SerializeField] private float hitVolume = 1f;
 
     [Header("Sounds")]
@@ -47,7 +48,7 @@ public class Health : MonoBehaviour
 
         if (curHealth <= 0)
         {
-            SoundManager.Instance.PlaySound(dieSounds, transform.position, SoundManager.Instance.GetAudioMixerGroup(AudioGroup.SFX));
+            SoundManager.Instance.PlaySound(dieSounds, transform.position, SoundManager.Instance.GetAudioMixerGroup(AudioGroup.SFX), volume: dieVolume);
             OnDie?.Invoke();
         }
         else
