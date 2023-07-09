@@ -1,5 +1,7 @@
 using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum GameState
 {
@@ -18,6 +20,9 @@ public class GameManager : MonoBehaviour
 
     private GameState gameState;
     private bool isGameWon;
+
+    public GameObject scoreText;
+    private int score = 0;
 
     private void Awake()
     {
@@ -99,5 +104,11 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.GameEnd);
         Debug.Log($"game ends, did win: {hasWon}");
         //game ends
+    }
+
+    public void IncreaseScore()
+    {
+        score += 1;
+        scoreText.GetComponent<TextMeshProUGUI>().text = $"Score :{score}";
     }
 }

@@ -45,6 +45,7 @@ public class Enemy : MonoBehaviour
     private void OnDestroy()
     {
         health.OnDie -= OnDie;
+        GameManager.Instance.IncreaseScore();
     }
 
     // Update is called once per frame
